@@ -1,0 +1,6 @@
+class Solution:
+    def minFallingPathSum(self, A: List[List[int]]) -> int:
+    	L, A, m = len(A), [[math.inf] + i + [math.inf] for i in A], math.inf
+    	for i,j in itertools.product(range(1,L),range(1,L+1)): A[i][j] += min(A[i-1][j-1],A[i-1][j],A[i-1][j+1])
+    	return min(A[-1])
+		
