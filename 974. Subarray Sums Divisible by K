@@ -1,0 +1,10 @@
+class Solution:
+    def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        nums=list(accumulate(nums))
+        md=Counter()
+        ans=0
+        for ind,num in enumerate(nums):
+            ans+=md[num%k]
+            md[num%k]+=1
+            if not num%k:ans+=1
+        return ans
