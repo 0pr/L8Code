@@ -1,0 +1,24 @@
+class Solution:
+    def minimumFuelCost(self, roads: List[List[int]], seats: int) -> int:
+        graph = collections.defaultdict(list)
+        for a, b in roads:
+            graph[a].append(b)
+            graph[b].append(a)
+        fuel = 0
+        visit = set()
+        def dfs(s):
+            visit.add(s)
+            size = 1
+            for v in graph[s]:
+                if v not in visit:
+                    sub_size = dfs(v)
+                    
+                    size +=sub_size
+            
+            if s != 0:
+                nonlocal fuel
+                fuel += math.ceil(size / seats)
+            return size
+        
+        dfs(0)
+        return fuel
