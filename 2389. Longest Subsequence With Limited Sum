@@ -1,0 +1,27 @@
+class Solution(object):
+    def answerQueries(self, nums, queries):
+        """
+        :type nums: List[int]
+        :type queries: List[int]
+        :rtype: List[int]"""
+        ans = []
+
+        nums.sort()
+        sumx = []
+        res = 0
+        for x in nums:
+            res += x
+            sumx.append(res)
+
+        for j in range(len(queries)):
+            for i, y in enumerate(sumx):
+                if y <= queries[j]:
+                    continue
+                else:
+                    ans.append(i)
+                    break
+            else:
+                if len(ans) < j + 1:
+                    ans.append(len(nums))
+        
+        return ans
