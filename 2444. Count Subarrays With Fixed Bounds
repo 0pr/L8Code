@@ -1,0 +1,13 @@
+from typing import List
+
+class Solution:
+    def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
+        ans = 0
+        left_min, left_max = -1, -1
+        for i in range(len(nums)):
+            if nums[i] >= minK:
+                left_min = i
+            if nums[i] <= maxK:
+                left_max = i
+            ans += left_max - left_min
+        return ans
